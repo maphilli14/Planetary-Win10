@@ -86,12 +86,12 @@ setAutoWaitTimeout(<span class="dig">1200</span>)
 </span><span class="cmt"># 20140501 Begin passing custom MP v Single and Drizzle selctions from menus
 </span><span class="cmt">#
 </span>fileloaderror = <img src="ZlAstronomyl.png" />
-percent=<span class="str">'66'</span>
+<span class="cmt">#percent='66'
+</span>
 
-
-<span class="kw">def</span> AS2(FOLDER,AP,Drizzle):
+<span class="kw">def</span> AS2(FOLDER,AP,Drizzle,percent):
     switchApp(<span class="str">"AutoStakkert"</span>)
-    <span class="skw">click</span>(Pattern(<img src="1Qpen.png" />).similar(<span class="dig">0.50</span>)) <span class="cmt"># SINGLE &amp; RGB?</span>
+    <span class="skw">click</span>(<img src="1461086970403.png" />) <span class="cmt"># SINGLE &amp; RGB?</span>
     <span class="skw">sleep</span>(<span class="dig">1</span>)
     <span class="skw">type</span>(<span class="str">"n"</span>,KEY_ALT)
     <span class="skw">sleep</span>(<span class="dig">0.5</span>)
@@ -99,8 +99,8 @@ percent=<span class="str">'66'</span>
     <span class="skw">sleep</span>(<span class="dig">0.5</span>)
     <span class="skw">type</span>(Key.ENTER)
     <span class="skw">sleep</span>(<span class="dig">0.5</span>)
-    <span class="skw">click</span>(exists(Pattern(<img src="1389797569446.png" />).similar(<span class="dig">0.28</span>).targetOffset(<span class="dig">387</span>,<span class="dig">128</span>),<span class="dig">2</span>))
-    <span class="skw">click</span>(exists(<img src="1415665075411.png" />,<span class="dig">2</span>))
+    <span class="cmt">#click(exists(Pattern("1389797569446.png").similar(0.28).targetOffset(387,128),2))
+</span>    <span class="skw">click</span>(exists(Pattern(<img src="1461087120713.png" />).similar(<span class="dig">0.42</span>),<span class="dig">2</span>))
 
 
     <span class="skw">sleep</span>(<span class="dig">0.5</span>)
@@ -114,19 +114,19 @@ percent=<span class="str">'66'</span>
 </span>    <span class="kw">print</span>(<span class="str">'AP = '</span>+str(AP))
     <span class="kw">if</span> AP == <span class="str">'s'</span>:
         <span class="kw">print</span>(<span class="str">'Using Single AP method'</span>)
-        <span class="skw">click</span>(Pattern(<img src="WidthHeightS.png" />).similar(<span class="dig">0.69</span>).targetOffset(-<span class="dig">54</span>,-<span class="dig">137</span>))
-        <span class="skw">click</span>(Pattern(<img src="1415665268913.png" />).targetOffset(-<span class="dig">52</span>,<span class="dig">28</span>))
+        <span class="skw">click</span>(Pattern(<img src="1461087334579.png" />).targetOffset(-<span class="dig">53</span>,-<span class="dig">193</span>))
+        <span class="skw">click</span>(Pattern(<img src="1461093269685.png" />).targetOffset(-<span class="dig">74</span>,<span class="dig">28</span>))
         <span class="skw">type</span>(<span class="str">'0'</span>+Key.TAB+<span class="str">'0'</span>+Key.TAB+<span class="str">'0'</span>+Key.TAB+str(percent))
-        <span class="skw">click</span>(Pattern(<img src="1415665268913.png" />).targetOffset(-<span class="dig">53</span>,-<span class="dig">13</span>))
+        <span class="skw">click</span>(Pattern(<img src="1461093269685.png" />).targetOffset(-<span class="dig">70</span>,-<span class="dig">17</span>))
         <span class="skw">type</span>(<span class="str">'0'</span>+Key.TAB+<span class="str">'0'</span>+Key.TAB+<span class="str">'0'</span>+Key.TAB+<span class="str">'0'</span>)
     <span class="kw">else</span>:
         <span class="kw">pass</span>
     <span class="kw">if</span> AP == <span class="str">'m'</span>:
         <span class="kw">print</span>(<span class="str">'Using Multi AP method'</span>)
-        <span class="skw">click</span>(Pattern(<img src="WidthHeightS.png" />).similar(<span class="dig">0.69</span>).targetOffset(-<span class="dig">53</span>,-<span class="dig">118</span>))
-        <span class="skw">click</span>(Pattern(<img src="1398957372328.png" />).targetOffset(-<span class="dig">7</span>,<span class="dig">160</span>))
+        <span class="skw">click</span>(Pattern(<img src="1461087334579.png" />).targetOffset(-<span class="dig">55</span>,-<span class="dig">177</span>))
+        <span class="skw">click</span>(Pattern(<img src="1461087334579.png" />).targetOffset(<span class="dig">0</span>,<span class="dig">197</span>))
         <span class="kw">print</span>(<span class="str">'Looking for percent'</span>)
-        <span class="skw">click</span>(Pattern(<img src="1427196763553.png" />).targetOffset(<span class="dig">54</span>,<span class="dig">45</span>))
+        <span class="skw">click</span>(Pattern(<img src="1461093374525.png" />).targetOffset(<span class="dig">57</span>,<span class="dig">32</span>))
         <span class="skw">type</span>(Key.BACKSPACE)
         <span class="skw">sleep</span>(<span class="dig">0.1</span>)
         <span class="skw">type</span>(str(percent))
@@ -136,23 +136,23 @@ percent=<span class="str">'66'</span>
     <span class="skw">sleep</span>(<span class="dig">0.5</span>)
     <span class="cmt">#Selection of Drizzle Options
 </span>    <span class="kw">if</span> Drizzle == <span class="str">'1'</span>:
-        <span class="skw">click</span>(Pattern(<img src="AdvancedSett.png" />).similar(<span class="dig">0.29</span>).targetOffset(-<span class="dig">18</span>,-<span class="dig">22</span>))
+        <span class="skw">click</span>(Pattern(<img src="1461090387355.png" />).targetOffset(-<span class="dig">26</span>,-<span class="dig">4</span>))
     <span class="kw">elif</span> Drizzle == <span class="str">'3'</span>:
-        <span class="skw">click</span>(Pattern(<img src="AdvancedSett.png" />).similar(<span class="dig">0.28</span>).targetOffset(-<span class="dig">16</span>,-<span class="dig">5</span>))
+        <span class="skw">click</span>(Pattern(<img src="1461090387355.png" />).targetOffset(-<span class="dig">26</span>,<span class="dig">16</span>))
     <span class="kw">else</span>:
-        <span class="skw">click</span>(Pattern(<img src="AdvancedSett.png" />).similar(<span class="dig">0.29</span>).targetOffset(-<span class="dig">17</span>,-<span class="dig">22</span>))
+        <span class="skw">click</span>(Pattern(<img src="1461090427879.png" />).targetOffset(<span class="dig">12</span>,<span class="dig">47</span>))
     <span class="skw">sleep</span>(<span class="dig">0.5</span>)
-    <span class="skw">click</span>(Pattern(<img src="AdvancedSett.png" />).similar(<span class="dig">0.48</span>).targetOffset(-<span class="dig">8</span>,<span class="dig">52</span>))
+    <span class="skw">click</span>(Pattern(<img src="1461090427879.png" />).targetOffset(<span class="dig">12</span>,<span class="dig">47</span>))
     <span class="skw">sleep</span>(<span class="dig">10</span>)
     <span class="kw">print</span>(<span class="str">''</span>)
     <span class="kw">print</span>(<span class="str">'Waiting for AS2 to complete'</span>)
     <span class="kw">print</span>(<span class="str">''</span>)
-    <span class="skw">wait</span>(Pattern(<img src="1355554016019.png" />).similar(<span class="dig">0.77</span>))
+    <span class="skw">wait</span>(Pattern(<img src="1461090520331.png" />).exact())
     <span class="kw">print</span>(<span class="str">''</span>)
     <span class="kw">print</span>(<span class="str">'Checking for completion again'</span>)
     <span class="kw">print</span>(<span class="str">''</span>)
-    <span class="skw">wait</span>(Pattern(<img src="1355554016019.png" />).similar(<span class="dig">0.77</span>))
-    <span class="kw">if</span> exists:(<span class="skw">click</span>(Pattern(<img src="1395884074220.png" />).similar(<span class="dig">0.36</span>).targetOffset(<span class="dig">301</span>,-<span class="dig">262</span>)))
+    <span class="skw">wait</span>(Pattern(<img src="1461090520331.png" />).exact())
+    <span class="kw">if</span> exists:(<span class="skw">click</span>(Pattern(<img src="1461090552521.png" />).targetOffset(<span class="dig">369</span>,-<span class="dig">327</span>)))
     <span class="skw">sleep</span>(<span class="dig">5</span>)
 <span class="cmt">#    AS2CPU()
 </span><span class="cmt">#Read most recent DATE and times within

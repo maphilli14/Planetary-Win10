@@ -16,8 +16,8 @@ def m1():
     print 'Ok, let\'s customize this...\n'
     m2()
   else:
-    print '\n\nMoving on with default settings:\n  1.5x Drizzle\n  Single Point Alignment\n\n'
-    AS2.AS2('s','1')
+    print '\n\nMoving on with default settings:\n  1.5x Drizzle\n  Single Point Alignment\n  Percent as 66%\n'
+    AS2.AS2('s','1','66')
    
 
 def m2():
@@ -30,14 +30,7 @@ def m2():
   for entry in options:
     print entry, menu[entry]
     selection=raw_input("Please Select:")
-    if selection =='sat':
-      print "\nLoading Saturn settings\n"
-      #m3(selection)
-    elif selection == 'mars':
-      print "\nLoading Mars settings\n"
-    elif selection == 'jup':
-      print "\nLoading Jupiter settings\n"
-    elif selection == 's':
+    if selection == 's':
       print "\nSetting Single Point Alignment\n"
       AP='s'
     elif selection == 'm':
@@ -52,7 +45,14 @@ def m2():
     else: 
       print "Unknown Option Selected!\n"
       break
-  AS2.AS2(AP,Drizzle)
+  menu3 = {}
+  menu3['3) ']="Select the percentage you wish to stack [66]"
+  options3=menu3.keys()
+  options3.sort()
+  for entry in options3:
+    print entry, menu3[entry]
+    percent=raw_input("Please Select Percentage to Stack: ")
+  AS2.AS2(AP,Drizzle,percent)
   
 
 def m3(planet):

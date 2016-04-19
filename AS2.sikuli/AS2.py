@@ -14,12 +14,12 @@ setAutoWaitTimeout(1200)
 # 20140501 Begin passing custom MP v Single and Drizzle selctions from menus
 #
 fileloaderror = "ZlAstronomyl.png"
-percent='66'
+#percent='66'
 
 
-def AS2(FOLDER,AP,Drizzle):
+def AS2(FOLDER,AP,Drizzle,percent):
     switchApp("AutoStakkert")
-    click(Pattern("1Qpen.png").similar(0.50)) # SINGLE & RGB?
+    click("1461086970403.png") # SINGLE & RGB?
     sleep(1)
     type("n",KEY_ALT)
     sleep(0.5)
@@ -27,8 +27,8 @@ def AS2(FOLDER,AP,Drizzle):
     sleep(0.5)
     type(Key.ENTER)
     sleep(0.5)
-    click(exists(Pattern("1389797569446.png").similar(0.28).targetOffset(387,128),2))
-    click(exists("1415665075411.png",2))
+    #click(exists(Pattern("1389797569446.png").similar(0.28).targetOffset(387,128),2))
+    click(exists(Pattern("1461087120713.png").similar(0.42),2))
     
     
     sleep(0.5)
@@ -42,19 +42,19 @@ def AS2(FOLDER,AP,Drizzle):
     print('AP = '+str(AP))
     if AP == 's':
         print('Using Single AP method')
-        click(Pattern("WidthHeightS.png").similar(0.69).targetOffset(-54,-137))
-        click(Pattern("1415665268913.png").targetOffset(-52,28))
+        click(Pattern("1461087334579.png").targetOffset(-53,-193))
+        click(Pattern("1461093269685.png").targetOffset(-74,28))
         type('0'+Key.TAB+'0'+Key.TAB+'0'+Key.TAB+str(percent))
-        click(Pattern("1415665268913.png").targetOffset(-53,-13))
+        click(Pattern("1461093269685.png").targetOffset(-70,-17))
         type('0'+Key.TAB+'0'+Key.TAB+'0'+Key.TAB+'0')
     else:
         pass
     if AP == 'm':
         print('Using Multi AP method')
-        click(Pattern("WidthHeightS.png").similar(0.69).targetOffset(-53,-118))
-        click(Pattern("1398957372328.png").targetOffset(-7,160))
+        click(Pattern("1461087334579.png").targetOffset(-55,-177))
+        click(Pattern("1461087334579.png").targetOffset(0,197))
         print('Looking for percent')
-        click(Pattern("1427196763553.png").targetOffset(54,45))
+        click(Pattern("1461093374525.png").targetOffset(57,32))
         type(Key.BACKSPACE)
         sleep(0.1)
         type(str(percent))
@@ -64,23 +64,23 @@ def AS2(FOLDER,AP,Drizzle):
     sleep(0.5)
     #Selection of Drizzle Options
     if Drizzle == '1':
-        click(Pattern("AdvancedSett.png").similar(0.29).targetOffset(-18,-22))
+        click(Pattern("1461090387355.png").targetOffset(-26,-4))
     elif Drizzle == '3':
-        click(Pattern("AdvancedSett.png").similar(0.28).targetOffset(-16,-5))
+        click(Pattern("1461090387355.png").targetOffset(-26,16))
     else:
-        click(Pattern("AdvancedSett.png").similar(0.29).targetOffset(-17,-22))
+        click(Pattern("1461090427879.png").targetOffset(12,47))
     sleep(0.5)
-    click(Pattern("AdvancedSett.png").similar(0.48).targetOffset(-8,52))
+    click(Pattern("1461090427879.png").targetOffset(12,47))
     sleep(10)
     print('')
     print('Waiting for AS2 to complete')
     print('')
-    wait(Pattern("1355554016019.png").similar(0.77))
+    wait(Pattern("1461090520331.png").exact())
     print('')
     print('Checking for completion again')
     print('')
-    wait(Pattern("1355554016019.png").similar(0.77))
-    if exists:(click(Pattern("1395884074220.png").similar(0.36).targetOffset(301,-262)))
+    wait(Pattern("1461090520331.png").exact())
+    if exists:(click(Pattern("1461090552521.png").targetOffset(369,-327)))
     sleep(5)
 #    AS2CPU()
 #Read most recent DATE and times within

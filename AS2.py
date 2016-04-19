@@ -16,17 +16,17 @@ FCfiletype='avi'
 cli = xmlrpclib.ServerProxy("http://127.0.0.1:1337",allow_none=True)
 Sikuli='D:\\D-Permanent\\Software\\Win7Installs\\Sikuli\\runIDE.cmd'
 Sikuliarg1='-r'
-scriptname='C:\\Users\\miphilli\\Documents\\GitHub\\Planetary\\AS2.sikuli'
+scriptname='C:\\Users\\miphilli\\Documents\\GitHub\\Planetary-Win10\\AS2.sikuli'
 proc = subprocess.Popen([Sikuli,Sikuliarg1,scriptname])
 time.sleep(15)
 
-def AS2(AP,Drizzle):
+def AS2(AP,Drizzle,percent):
         #
         # Variable defintions
         #
         Win7Disk='C:\\'
         C='D:\\'
-        D='E:\\'
+        D='I:\\'
         FC=os.path.join(Win7Disk,'Personal\\A-Inbox\\FireCaptures\\')
         #FC=os.path.join('D:\\A-Inbox\\1-Corianders-primary')
         #FC=os.path.join('E:\\Personal\\A-Inbox\\1-Corianders-primary')
@@ -154,7 +154,7 @@ def AS2(AP,Drizzle):
                                                         AutoStakkert = subprocess.Popen('D:\\D-Permanent\\Dropbox\\5-Permanent\\Astronomy\\Software\\AutoStakkert\\AutoStakkert.exe')
                                                         print TIME+' needs to be AS2 Stacked'
                                                         time.sleep(5)
-                                                        cli.AS2(os.path.join(FC,planet,DATE,TIME),AP,Drizzle)
+                                                        cli.AS2(os.path.join(FC,planet,DATE,TIME),AP,Drizzle,percent)
                                                         print '\nDone stacking...searching for stacked files...\n'
                                                         FILES=os.listdir(os.path.join(FC,planet,DATE,TIME))
                                                         DONEs=[FILE for FILE in FILES if FILE.startswith('AS_')]
