@@ -67,13 +67,32 @@
    </head>
 <body>
 <div class="info">
-<h2>RGB.sikuli\RGB.sikuli</h2> <a href="RGB.sikuli\RGB.zip">(Download this script)</a>
+<h2>RGB.sikuli</h2> <a href="RGB.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-<span class="kw">for</span> n <span class="kw">in</span> range(<span class="dig">10</span>):
-    <span class="skw">sleep</span>(<span class="dig">60</span>)
-    <span class="skw">click</span>(Pattern(<img src="1427165114370.png" />).similar(<span class="dig">0.79</span>).targetOffset(-<span class="dig">12</span>,<span class="dig">36</span>))
-    <span class="skw">sleep</span>(<span class="dig">90</span>)
+<span class="kw">import</span> os
+
+
+
+L=os.listdir(os.path.join(<span class="str">'C:\Personal\A-Inbox\FC\Jup\Jup_2018_01_20\AS_f2000\VerL'</span>))
+
+<span class="kw">for</span> f <span class="kw">in</span> L:
+        <span class="kw">if</span> <span class="str">'-B-'</span> <span class="kw">in</span> f:
+                MID=f[<span class="dig">11</span>:<span class="dig">17</span>]
+                <span class="kw">if</span> <span class="str">'-R-'</span> <span class="kw">in</span> L[L.index(f)-<span class="dig">1</span>]:
+                        RED = L[L.index(f)-<span class="dig">1</span>]
+                <span class="kw">else</span>:
+                        RED = <span class="str">''</span>
+                <span class="kw">if</span> <span class="str">'-G-'</span> <span class="kw">in</span> L[L.index(f)+<span class="dig">1</span>]:
+                        GREEN = L[L.index(f)+<span class="dig">1</span>]
+                <span class="kw">else</span>:
+                        GREEN = <span class="str">''</span>
+                <span class="kw">print</span> <span class="str">'MIDTIME = '</span>+str(MID)
+                <span class="kw">print</span> <span class="str">'=================='</span>
+                <span class="kw">print</span> <span class="str">'RED = '</span>+RED
+                <span class="kw">print</span> <span class="str">'GREEN = '</span>+GREEN
+                <span class="kw">print</span> <span class="str">'BLUE = '</span>+f
+                <span class="kw">print</span> <span class="str">''</span>
 </pre>
 </body>
 </html>
