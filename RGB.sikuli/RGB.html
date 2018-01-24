@@ -70,29 +70,89 @@
 <h2>RGB.sikuli</h2> <a href="RGB.zip">(Download this script)</a>
 </div>
 <pre class="sikuli-code">
-<span class="kw">import</span> os
+<span class="kw">from</span> sikuli.Sikuli <span class="kw">import</span> *
+<span class="cmt">#</span>
+<span class="kw">import</span> subprocess, sys, os, os.path, shutil, ntpath, re
+<span class="kw">from</span> SimpleXMLRPCServer <span class="kw">import</span> SimpleXMLRPCServer <span class="kw">as</span> Server
+srv = Server((<span class="str">"127.0.0.1"</span>, <span class="dig">1337</span>),allow_none=True) <span class="cmt"># as an example on the same machine</span>
+<span class="kw">if</span> <span class="kw">not</span> srv: exit(<span class="dig">1</span>)
+<span class="cmt">#</span>
+setAutoWaitTimeout(<span class="dig">300</span>)
+<span class="cmt">#</span>
+<span class="cmt">#</span>
+<span class="cmt"># -*- coding: UTF-8 -*-</span>
+<span class="cmt">#</span>
+
+<span class="kw">def</span> GIMPRGB(STACKEDFOLDER,RGB):
+    <span class="kw">try</span>:
+        COLORS=[<span class="str">'RED.tif'</span>,<span class="str">'GREEN.tif'</span>,<span class="str">'BLUE.tif'</span>]
+        <span class="kw">for</span> c <span class="kw">in</span> COLORS:
+            switchApp(<span class="str">'GNU'</span>)
+            <span class="skw">click</span>(<img src="1516829911499.png" />)
+            <span class="skw">sleep</span>(<span class="dig">1</span>)
+            <span class="skw">type</span>(<span class="str">'f'</span>,KEY_ALT)
+            <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+            <span class="skw">type</span>(<span class="str">'o'</span>)
+            <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+            <span class="skw">click</span>(<img src="1516830020089.png" />)
+            <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+            <span class="skw">type</span>(<span class="str">'l'</span>,KEY_ALT)
+            <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+            paste(os.path.join(STACKEDFOLDER,c))
+            <span class="skw">type</span>(Key.ENTER)
+            <span class="skw">sleep</span>(<span class="dig">7</span>)
+            <span class="skw">click</span>(<img src="1516829911499.png" />)
+            <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+            <span class="skw">type</span>(<span class="str">'f'</span>,KEY_ALT)
+            <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+            <span class="skw">type</span>(<span class="str">'a'</span>)
+            <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+            <span class="skw">type</span>(os.path.join(c[<span class="dig">18</span>]))
+            <span class="skw">type</span>(Key.ENTER)
+            <span class="skw">sleep</span>(<span class="dig">1</span>)
+            <span class="kw">if</span> exists(<img src="1516830061908.png" />,<span class="dig">2</span>):
+                <span class="skw">click</span>(<img src="1516830061908.png" />)
+                <span class="skw">sleep</span>(<span class="dig">2</span>)
+            <span class="kw">else</span>:
+                <span class="skw">click</span>(<img src="1516830108568.png" />)
+                <span class="skw">sleep</span>(<span class="dig">3</span>)
+            <span class="skw">click</span>(<img src="1516829911499.png" />)
+        <span class="skw">click</span>(<img src="1516829911499.png" />)
+        <span class="skw">type</span>(<span class="str">'c'</span>,KEY_ALT)
+        <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+        <span class="skw">type</span>(<span class="str">'o'</span>)
+        <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+        <span class="skw">type</span>(<span class="str">'o'</span>)
+        <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+        <span class="skw">click</span>(Pattern(<img src="1516830319137.png" />).targetOffset(<span class="dig">38</span>,-<span class="dig">38</span>))
+        <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+        <span class="skw">click</span>(<img src="1516831933131.png" />)
+        <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+        <span class="skw">click</span>(Pattern(<img src="1516830319137.png" />).targetOffset(<span class="dig">34</span>,<span class="dig">5</span>))
+        <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+        <span class="skw">click</span>(<img src="1516831956391.png" />)
+        <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+        <span class="skw">click</span>(Pattern(<img src="1516830319137.png" />).targetOffset(<span class="dig">35</span>,<span class="dig">46</span>))
+        <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+        <span class="skw">click</span>(<img src="1516831970389.png" />)
+        <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+        <span class="skw">click</span>(<img src="1516830977806.png" />)
+        <span class="skw">sleep</span>(<span class="dig">1</span>)
+        <span class="skw">click</span>(<img src="1516829911499.png" />)
+        <span class="skw">type</span>(<span class="str">'f'</span>,KEY_ALT)
+        <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+        <span class="skw">type</span>(<span class="str">'e'</span>)
+        paste(os.path.join(STACKEDFOLDER,RGB))
+        <span class="skw">type</span>(Key.ENTER)
+        <span class="skw">sleep</span>(<span class="dig">7</span>)
+        <span class="skw">type</span>(<span class="str">'w'</span>,KEY_CTRL+KEY_SHIFT)
+        <span class="skw">sleep</span>(<span class="dig">0.2</span>)
+    <span class="kw">except</span>:
+        <span class="kw">pass</span>
 
 
-
-L=os.listdir(os.path.join(<span class="str">'C:\Personal\A-Inbox\FC\Jup\Jup_2018_01_20\AS_f2000\VerL'</span>))
-
-<span class="kw">for</span> f <span class="kw">in</span> L:
-        <span class="kw">if</span> <span class="str">'-B-'</span> <span class="kw">in</span> f:
-                MID=f[<span class="dig">11</span>:<span class="dig">17</span>]
-                <span class="kw">if</span> <span class="str">'-R-'</span> <span class="kw">in</span> L[L.index(f)-<span class="dig">1</span>]:
-                        RED = L[L.index(f)-<span class="dig">1</span>]
-                <span class="kw">else</span>:
-                        RED = <span class="str">''</span>
-                <span class="kw">if</span> <span class="str">'-G-'</span> <span class="kw">in</span> L[L.index(f)+<span class="dig">1</span>]:
-                        GREEN = L[L.index(f)+<span class="dig">1</span>]
-                <span class="kw">else</span>:
-                        GREEN = <span class="str">''</span>
-                <span class="kw">print</span> <span class="str">'MIDTIME = '</span>+str(MID)
-                <span class="kw">print</span> <span class="str">'=================='</span>
-                <span class="kw">print</span> <span class="str">'RED = '</span>+RED
-                <span class="kw">print</span> <span class="str">'GREEN = '</span>+GREEN
-                <span class="kw">print</span> <span class="str">'BLUE = '</span>+f
-                <span class="kw">print</span> <span class="str">''</span>
+srv.register_function(GIMPRGB)
+srv.serve_forever()
 </pre>
 </body>
 </html>
