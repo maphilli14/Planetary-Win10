@@ -5,7 +5,7 @@ from SimpleXMLRPCServer import SimpleXMLRPCServer as Server
 srv = Server(("127.0.0.1", 1337),allow_none=True) # as an example on the same machine
 if not srv: exit(1)
 #
-setAutoWaitTimeout(300)
+setAutoWaitTimeout(15)
 #
 #
 # -*- coding: UTF-8 -*-
@@ -13,38 +13,36 @@ setAutoWaitTimeout(300)
 
 def GIMPRGB(STACKEDFOLDER,RGB):
     try:
-        COLORS=['RED.tif','GREEN.tif','BLUE.tif']
-        for c in COLORS:
-            switchApp('GNU')
-            click("1516829911499.png")            
-            sleep(1)
-            type('f',KEY_ALT)
-            sleep(0.2)
-            type('o')
-            sleep(0.2)
-            click("1516830020089.png")
-            sleep(0.2)
+        switchApp('GNU')
+        click("1516829911499.png")            
+        sleep(1)
+        type('w',KEY_CTRL+KEY_SHIFT)
+        sleep(0.2)
+        switchApp('GNU')
+        click("1516829911499.png")            
+        sleep(1)
+        type('f',KEY_ALT)
+        sleep(0.2)
+        type('o')
+        sleep(0.2)
+        click("1516830020089.png")
+        sleep(0.2)
+        if exists("1517064575408.png"):
+            pass
+        else:
             type('l',KEY_ALT)
-            sleep(0.2)
-            paste(os.path.join(STACKEDFOLDER,c))
-            type(Key.ENTER)
-            sleep(7)
-            click("1516829911499.png")            
-            sleep(0.2)
-            type('f',KEY_ALT)
-            sleep(0.2)
-            type('a')
-            sleep(0.2)
-            type(os.path.join(c[18]))
-            type(Key.ENTER)
-            sleep(1)
-            if exists("1516830061908.png",2):
-                click("1516830061908.png")
-                sleep(2)
-            else:
-                click("1516830108568.png")
-                sleep(3)
-            click("1516829911499.png")            
+        sleep(0.2)
+        paste(os.path.join(STACKEDFOLDER,'temp'))
+        type(Key.ENTER)
+        sleep(1)
+        click(Pattern("1517067301601.png").similar(0.85))
+        type('a',KEY_CTRL)
+        sleep(0.2)
+        click("1517067073574.png")
+        sleep(1)
+        if exists("1517065014495.png",2):
+            sleep(3)
+        sleep(2)
         click("1516829911499.png")            
         type('c',KEY_ALT)
         sleep(0.2)
@@ -67,17 +65,30 @@ def GIMPRGB(STACKEDFOLDER,RGB):
         click("1516830977806.png")        
         sleep(1)
         click("1516829911499.png")            
-        type('f',KEY_ALT)
+        type('e',KEY_CTRL+KEY_SHIFT)
+        wait("1516854495300.png")
         sleep(0.2)
-        type('e')
-        paste(os.path.join(STACKEDFOLDER,RGB))
+        click("1516830020089.png")
+        sleep(0.2)
+        type('n',KEY_ALT)
+        sleep(0.2)
+        paste(os.path.join(STACKEDFOLDER,'RGB',RGB.strip('.tif')))
         type(Key.ENTER)
-        sleep(7)
+        sleep(1)
+        if exists("1516832477260.png",2):
+            click("1516832477260.png",2)
+            sleep(2)
+        else:
+            pass
+        sleep(2)
+        click(Pattern("1516833090528.png").targetOffset(-5,15),2)
+        waitVanish(Pattern("1516833090528.png").targetOffset(-5,15))
+        click(Pattern("1516829911499.png").targetOffset(26,5),2)
+        sleep(1)
         type('w',KEY_CTRL+KEY_SHIFT)
         sleep(0.2)
     except:
         pass
-
 
 srv.register_function(GIMPRGB)
 srv.serve_forever()
