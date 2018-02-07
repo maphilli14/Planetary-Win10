@@ -18,7 +18,7 @@ arcsec='\"'
 Deg="°"
 degree=unicode(Deg, errors="ignore")
 
-CurrentFile="D:\\D-Permanent\\Dropbox\\D-Permanent\\Astronomy\\Logs\\currentephem.txt"
+CurrentFile="D:\\Dropbox\\D-Permanent\\Astronomy\\Logs\\currentephem.txt"
 #file = open(CurrentFile,"r")
 #
 ISODATE=""
@@ -182,11 +182,7 @@ if Planet == 'Uranus':
         "Alt:"+ALT+", Ring:"+Ring+
         "\nElong: "+Elong+"("+ElongDir+")")
 
-#popup(R)
-#UnicodeEncodeError: 'ascii' codec can't encode character u'\xb0' in position 39: ordinal not in range(128)
-#file.write(R)
 
-#
 #
 
 os.popen("notepad "+CurrentFile)
