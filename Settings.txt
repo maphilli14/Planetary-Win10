@@ -1,0 +1,3 @@
+FireCaptureRoot='C:\Personal\A-Inbox\FC'
+b='C:\B-Sorted'
+c='D:\Personal'
