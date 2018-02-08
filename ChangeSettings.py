@@ -5,6 +5,7 @@ import subprocess, sys, os, os.path, shutil, ntpath, re, time
 	The settings used to be stored in each script.
 	This script calls a file 'settings.txt' and sets variables for your
 	reuse.
+	Started using GIT to syncronize changes across systems
 
 
 '''
