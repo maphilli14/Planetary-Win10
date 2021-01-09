@@ -83,11 +83,14 @@ setAutoWaitTimeout(<span class="dig">300</span>)
 <span class="cmt"># -*- coding: UTF-8 -*-</span>
 <span class="cmt">#</span>
 
+Planet=<span class="skw">input</span>(<span class="str">"Input Planet's position number:\n EG: 5= Jupiter"</span>)
+
 
 <span class="cmt">#Notify='notify-send -i \'/home/miphilli/Dropbox/5-Permanent/Icons/WinJUPOS-N-up.png\' \'Starting a Sikuli Script\' -t 30000'</span>
 <span class="cmt">#os.popen(Notify+Key.ENTER)</span>
 arcsec=<span class="str">'\"'</span>
 Deg=<span class="str">"°"</span>
+<span class="cmt">#Deg=""</span>
 degree=unicode(Deg, errors=<span class="str">"ignore"</span>)
 
 CurrentFile=<span class="str">"D:\\Dropbox\\D-Permanent\\Astronomy\\Logs\\currentephem.txt"</span>
@@ -105,7 +108,7 @@ Eph=(Pattern(<img src="ephem.png" />).similar(<span class="dig">0.36</span>))
 <span class="cmt">#Eph=(Pattern("1433027864991.png").similar(0.22))</span>
 
 <span class="cmt">#</span>
-os.popen(<span class="str">"killall workrave"</span>)
+<span class="cmt">#os.popen("killall workrave")</span>
 switchApp(<span class="str">"WinJUPOS"</span>)
 <span class="cmt">#</span>
 <span class="cmt">#CMSYS</span>
@@ -121,18 +124,25 @@ UTandCM=ALTtext = Env.getClipboard()
 DATE=UTandCM.split()[<span class="dig">0</span>]
 T=UTandCM.split()[<span class="dig">2</span>]+UTandCM.split()[<span class="dig">3</span>]+<span class="str">'C'</span>
 TIME=T.replace(<span class="str">':'</span>,<span class="str">'-'</span>)[:-<span class="dig">5</span>]
-CMSYStext=UTandCM[<span class="dig">35</span>:].lstrip()
-
-
+<span class="cmt">#CMSYStext=UTandCM[35:].strip().lstrip()[:0].encode('utf-8',errors='ignore')</span>
+CMSYStext=UTandCM[<span class="dig">35</span>:].encode(<span class="str">'utf-8'</span>)
+<span class="cmt">#print(CMSYStext)</span>
 <span class="cmt">#</span>
 <span class="cmt">#ALT</span>
 <span class="cmt">#hover(Alt)</span>
-<span class="skw">dragDrop</span>(Pattern(<img src="alt.png" />).similar(<span class="dig">0.40</span>).targetOffset(-<span class="dig">317</span>,-<span class="dig">30</span>),Pattern(<img src="alt.png" />).similar(<span class="dig">0.36</span>).targetOffset(<span class="dig">162</span>,<span class="dig">21</span>))
+<span class="skw">dragDrop</span>(Pattern(<img src="alt.png" />).similar(<span class="dig">0.40</span>).targetOffset(-<span class="dig">317</span>,-<span class="dig">30</span>),Pattern(<img src="alt.png" />).similar(<span class="dig">0.36</span>).targetOffset(<span class="dig">14</span>,-<span class="dig">26</span>))
 <span class="cmt">#dragDrop(Pattern("1433027942175.png").targetOffset(-407,-22), Pattern("1433027946540.png").targetOffset(128,18))</span>
 
 <span class="skw">type</span>(<span class="str">"c"</span>, KEY_CTRL)
 ALTtext = Env.getClipboard()
-ALT = ALTtext.split()[<span class="dig">2</span>]
+ALTtext=unicode(ALTtext.encode(<span class="str">'utf-8'</span>).strip(), errors=<span class="str">"ignore"</span>)
+<span class="kw">print</span>(<span class="str">"This is ALTtext"</span>)
+<span class="kw">print</span>(ALTtext)
+a=ALTtext
+ALT=a[<span class="dig">0</span>:<span class="dig">3</span>]+<span class="str">': '</span>+a[-<span class="dig">2</span>:]
+<span class="cmt">#ALT =str(ALTtext.split(':')[1][:-2])</span>
+<span class="kw">print</span>(<span class="str">"This is ALT"</span>)
+<span class="kw">print</span>(ALT)
 <span class="cmt">#</span>
 <span class="cmt">#Ephemerdis</span>
 <span class="cmt">#</span>
@@ -145,53 +155,115 @@ Ephtext = Env.getClipboard()
 
 E=Ephtext.split()
 
-Planet=E[<span class="dig">0</span>]
 
-<span class="kw">if</span> Planet == <span class="str">'Jupiter'</span>:
-    Dia=E[<span class="dig">51</span>]
-    Mag=E[<span class="dig">71</span>]
-    Ring=E[<span class="dig">80</span>].rstrip(<span class="str">','</span>)
-    Elong=E[<span class="dig">39</span>]
-    ElongDir=E[<span class="dig">41</span>]
-    LoS=E[<span class="dig">87</span>]
+
+
+<span class="str">'''
+       R=("j"+DATE+"_"+TIME+"\n\n"+CMSYStext+"\n\n"+
+        "Dia:"+Dia+", mag:"+Mag+"\n"+
+        "Alt:"+ALT+", Ls:"+LoS+
+        "\nElong: "+Elong+"("+ElongDir+")")
+
+Dia=E[51]
+Mag=E[71]
+Ring=E[80].rstrip(',')
+Elong=E[39]
+ElongDir=E[41]
+LoS=E[87]
+print("This is DATE")
+print(DATE)
+print("This is TIME")
+print(TIME)
+print("This is CMSYStext")
+print(CMSYStext)
+print("This is Dia")
+print(E[52])
+print("This is Mag")
+print(E[72])
+print("This is Ring")
+print(E[81].encode('utf-8').strip().rstrip(','))
+print("This is Elong")
+print(E[40].encode('utf-8').strip())
+print("This is ElongDir")
+print(E[42].encode('utf-8').strip())
+print("This is LoS")
+print(E[88].encode('utf-8').strip())
+'''</span>
+
+<span class="kw">if</span> Planet == <span class="str">'5'</span>:
+    Dia=E[<span class="dig">52</span>].encode(<span class="str">'utf-8'</span>).strip()
+    Mag=E[<span class="dig">72</span>].encode(<span class="str">'utf-8'</span>).strip()
+    Ring=E[<span class="dig">81</span>].encode(<span class="str">'utf-8'</span>).strip().rstrip(<span class="str">','</span>)
+    Elong=E[<span class="dig">40</span>].encode(<span class="str">'utf-8'</span>).strip()
+    ElongDir=E[<span class="dig">42</span>].encode(<span class="str">'utf-8'</span>).strip()
+    LoS=E[<span class="dig">88</span>][:-<span class="dig">1</span>].encode(<span class="str">'utf-8'</span>).strip()
     <span class="cmt">#</span>
     <span class="cmt">#RESULTS</span>
     <span class="cmt">#</span>
-    R=(<span class="str">"j"</span>+DATE+<span class="str">"_"</span>+TIME+<span class="str">"\n\n"</span>+CMSYStext+<span class="str">"\n\n"</span>+
-        <span class="str">"Dia:"</span>+Dia+<span class="str">", mag:"</span>+Mag+<span class="str">"\n"</span>+
-        <span class="str">"Alt:"</span>+ALT+<span class="str">", Ls:"</span>+LoS+
-        <span class="str">"\nElong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
+    <span class="kw">print</span>(<span class="str">"j"</span>+DATE+<span class="str">"_"</span>+TIME+<span class="str">"\n"</span>)
+    <span class="kw">print</span>(DATE+<span class="str">" - "</span>+T)
+    <span class="kw">print</span>(CMSYStext+<span class="str">"\n"</span>)
+    <span class="kw">print</span>(<span class="str">"Dia:"</span>+Dia+<span class="str">", mag:"</span>+Mag)
+    <span class="kw">print</span>(ALT+<span class="str">", Ls:"</span>+LoS)
+    <span class="kw">print</span>(<span class="str">"Elong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
 
-<span class="kw">if</span> Planet == <span class="str">'Saturn'</span>:
-    Dia=E[<span class="dig">51</span>]
-    Mag=E[<span class="dig">71</span>]
-    Ring=E[<span class="dig">80</span>].rstrip(<span class="str">','</span>)
-    Elong=E[<span class="dig">39</span>]
-    ElongDir=E[<span class="dig">41</span>]
-    LoS=E[<span class="dig">87</span>]
-    <span class="cmt">#</span>
-    <span class="cmt">#RESULTS</span>
-    <span class="cmt">#</span>
-    R=(<span class="str">"s"</span>+DATE+<span class="str">"_"</span>+TIME+<span class="str">"\n\n"</span>+CMSYStext+<span class="str">"\n\n"</span>+
-        <span class="str">"Dia:"</span>+Dia+<span class="str">", mag:"</span>+Mag+<span class="str">"\n"</span>+
-        <span class="str">"Alt:"</span>+ALT+<span class="str">", Ring:"</span>+Ring+
-        <span class="str">"\nElong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
-
-<span class="kw">if</span> Planet == <span class="str">'Mars'</span>:
-    Dia=E[<span class="dig">49</span>]
-    Mag=E[<span class="dig">73</span>]
-    Elong=E[<span class="dig">39</span>]
-    ElongDir=E[<span class="dig">41</span>]
-    LoS=E[<span class="dig">79</span>].lstrip(<span class="str">':'</span>).replace(<span class="str">''</span>,<span class="str">''</span>)[:-<span class="dig">1</span>]
+<span class="kw">if</span> Planet == <span class="str">'6'</span>:
+    <span class="skw">type</span>(<span class="str">"Saturn"</span>)
+    <span class="kw">print</span>(<span class="str">"THIS IS FOR Saturn!!!"</span>)
+    <span class="kw">for</span> x <span class="kw">in</span> E:
+        i=E.index(x)
+        <span class="kw">print</span>(str(i)+<span class="str">' '</span>+str(x.encode(<span class="str">'utf-8'</span>).strip()))
+        <span class="kw">print</span>(<span class="str">''</span>)
+        <span class="cmt">#type(Key.ENTER)</span>
+    <span class="cmt">#type(DATE+" - "+T)</span>
+    <span class="cmt">#type(Key.ENTER)</span>
+    <span class="cmt">#paste(R)</span>
+    <span class="cmt">#type('s', KEY_CTRL)</span>
+    <span class="cmt">#sleep(2)</span>
+    Elong=E[<span class="dig">40</span>][:-<span class="dig">1</span>]
+    ElongDir=E[<span class="dig">42</span>]
+    Dia=E[<span class="dig">52</span>]
+    Mag=E[<span class="dig">72</span>]
+    LoS=E[<span class="dig">88</span>].lstrip(<span class="str">':'</span>).replace(<span class="str">''</span>,<span class="str">''</span>)[:-<span class="dig">1</span>]
+    De=E[<span class="dig">83</span>][:-<span class="dig">1</span>]
+    <span class="kw">print</span>(<span class="str">"s"</span>+DATE+<span class="str">"_"</span>+TIME)
+    <span class="kw">print</span>(DATE+<span class="str">" - "</span>+T)
+    <span class="kw">print</span>(<span class="str">"\n"</span>+CMSYStext)
     <span class="kw">print</span> <span class="str">"LoS="</span>+LoS
-    Phase=str(<span class="dig">1</span>-float(E[<span class="dig">53</span>]))
+    <span class="kw">print</span>(<span class="str">"\n"</span>+<span class="str">"Dia:"</span>+Dia+<span class="str">", mag: "</span>+Mag+<span class="str">"\n"</span>+ALT+degree+<span class="str">", De: "</span>+De+degree+<span class="str">"\nElong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
+
+<span class="kw">if</span> Planet == <span class="str">'4'</span>:
+    <span class="skw">type</span>(<span class="str">"Mars"</span>)
+    <span class="kw">print</span>(<span class="str">"THIS IS FOR MARS!!!"</span>)
+    <span class="kw">for</span> x <span class="kw">in</span> E:
+        i=E.index(x)
+        <span class="kw">print</span>(str(i)+<span class="str">' '</span>+str(x.encode(<span class="str">'utf-8'</span>).strip()))
+        <span class="kw">print</span>(<span class="str">''</span>)
+        <span class="cmt">#type(Key.ENTER)</span>
+    <span class="cmt">#type(DATE+" - "+T)</span>
+    <span class="cmt">#type(Key.ENTER)</span>
+    <span class="cmt">#paste(R)</span>
+    <span class="cmt">#type('s', KEY_CTRL)</span>
+    <span class="cmt">#sleep(2)</span>
+    Elong=E[<span class="dig">40</span>][:-<span class="dig">1</span>]
+    ElongDir=E[<span class="dig">42</span>]
+    Dia=E[<span class="dig">50</span>]
+    Mag=E[<span class="dig">74</span>]
+    LoS=E[<span class="dig">80</span>].lstrip(<span class="str">':'</span>).replace(<span class="str">''</span>,<span class="str">''</span>)[:-<span class="dig">1</span>]
+    Phase=str(<span class="dig">1</span>-float(E[<span class="dig">54</span>]))
+    <span class="kw">print</span>(<span class="str">"m"</span>+DATE+<span class="str">"_"</span>+TIME)
+    <span class="kw">print</span>(DATE+<span class="str">" - "</span>+T)
+    <span class="kw">print</span>(<span class="str">"\n"</span>+CMSYStext)
+    <span class="kw">print</span> <span class="str">"LoS="</span>+LoS
+    <span class="kw">print</span>(<span class="str">"\n"</span>+<span class="str">"Dia:"</span>+Dia+<span class="str">", mag:"</span>+Mag+<span class="str">"\n"</span>+ALT+degree+<span class="str">", Phase:"</span>+Phase+<span class="str">"\nElong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
     <span class="cmt">#</span>
     <span class="cmt">#RESULTS</span>
     <span class="cmt">#</span>
-    R=(<span class="str">"m"</span>+DATE+<span class="str">"_"</span>+TIME+<span class="str">"\n\n"</span>+CMSYStext+<span class="str">"\n"</span>+<span class="str">"Ls= "</span>+LoS+degree+<span class="str">"\n\n"</span>+
-        <span class="str">"Dia:"</span>+Dia+<span class="str">", mag:"</span>+Mag+<span class="str">"\n"</span>+
-        <span class="str">"Alt:"</span>+ALT+<span class="str">", Phase:"</span>+Phase+
-        <span class="str">"\nElong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
+<span class="cmt">#    R=("m"+DATE+"_"+TIME+"\n\n"+CMSYStext+"\n"+"Ls= "+LoS+degree+"\n\n"+</span>
+<span class="cmt">#        "Dia:"+Dia+", mag:"+Mag+"\n"+</span>
+<span class="cmt">#        "Alt:"+ALT+", Phase:"+Phase+</span>
+<span class="cmt">#        "\nElong: "+Elong+"("+ElongDir+")")</span>
+<span class="cmt">#    print(R)</span>
 
 
 <span class="kw">if</span> Planet == <span class="str">'Venus'</span>:
@@ -199,7 +271,7 @@ Planet=E[<span class="dig">0</span>]
     Mag=E[<span class="dig">74</span>]
     Elong=E[<span class="dig">39</span>]
     ElongDir=E[<span class="dig">41</span>]
-    Phase=str(<span class="dig">1</span>-float(E[<span class="dig">54</span>]))
+    Phase=str(float(E[<span class="dig">54</span>]))
     <span class="cmt">#</span>
     <span class="cmt">#RESULTS</span>
     <span class="cmt">#</span>
@@ -209,7 +281,7 @@ Planet=E[<span class="dig">0</span>]
         <span class="str">"\nElong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
 
 <span class="kw">if</span> Planet == <span class="str">'Mercury'</span>:
-    Dia=E[<span class="dig">51</span>]
+    Dia=E[<span class="dig">49</span>]
     Mag=E[<span class="dig">74</span>]
     Ring=E[<span class="dig">80</span>].rstrip(<span class="str">','</span>)
     Elong=E[<span class="dig">39</span>]
@@ -218,10 +290,24 @@ Planet=E[<span class="dig">0</span>]
     <span class="cmt">#</span>
     <span class="cmt">#RESULTS</span>
     <span class="cmt">#</span>
+    <span class="cmt">#print(UTandCM.encode('utf-8'))</span>
+    <span class="cmt">#print(Dia)</span>
+    <span class="cmt">#print(Mag)</span>
+    <span class="kw">print</span>(CMSYStext)
+    <span class="cmt">#print(LoS.encode('utf-8'))</span>
+    <span class="cmt">#print(Elong.encode('utf-8'))</span>
+    <span class="cmt">#print(ElongDir)</span>
+    <span class="kw">print</span>(Deg)
+    Phase=str(float(E[<span class="dig">54</span>]))
+    ALT=ALT.encode(<span class="str">'ascii'</span>, <span class="str">'ignore'</span>).decode(<span class="str">'ascii'</span>)
+    TIME=TIME.encode(<span class="str">'ascii'</span>, <span class="str">'ignore'</span>).decode(<span class="str">'ascii'</span>)
+    LoS=LoS.encode(<span class="str">'ascii'</span>, <span class="str">'ignore'</span>).decode(<span class="str">'ascii'</span>)
+    Elong=Elong.encode(<span class="str">'ascii'</span>, <span class="str">'ignore'</span>).decode(<span class="str">'ascii'</span>)
+    <span class="kw">print</span>(TIME)
     R=(<span class="str">"Me"</span>+DATE+<span class="str">"_"</span>+TIME+<span class="str">"\n\n"</span>+CMSYStext+<span class="str">"\n\n"</span>+
         <span class="str">"Dia:"</span>+Dia+<span class="str">", mag:"</span>+Mag+<span class="str">"\n"</span>+
-        <span class="str">"Alt:"</span>+ALT+<span class="str">", Ls:"</span>+LoS+
-        <span class="str">"\nElong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
+        <span class="str">"Alt:"</span>+ALT+<span class="str">", Phase:"</span>+Phase+
+        <span class="str">"\nElong: "</span>+Elong+degree+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
 
 
 <span class="kw">if</span> Planet == <span class="str">'Neptune'</span>:
@@ -256,23 +342,30 @@ Planet=E[<span class="dig">0</span>]
 
 
 <span class="cmt">#</span>
+<span class="str">'''
+os.popen("notepad "+CurrentFile)
+sleep(5)
+type(Key.END, KEY_CTRL)
+sleep(0.5)
+type(Key.ENTER)
+type(Key.ENTER)
+#type(Deg)
+print("typing Planet")
 
-os.popen(<span class="str">"notepad "</span>+CurrentFile)
-<span class="skw">sleep</span>(<span class="dig">5</span>)
-<span class="skw">type</span>(Key.END, KEY_CTRL)
-<span class="skw">sleep</span>(<span class="dig">0.5</span>)
-paste(Key.ENTER)
-paste(Key.ENTER)
-paste(Planet)
-paste(Key.ENTER)
-paste(DATE+<span class="str">" - "</span>+T)
-paste(Key.ENTER)
-paste(R)
-<span class="skw">type</span>(<span class="str">'s'</span>, KEY_CTRL)
-<span class="skw">sleep</span>(<span class="dig">2</span>)
-os.popen(<span class="str">"workrave"</span>)
-Notify=<span class="str">'notify-send -i \'/home/miphilli/Dropbox/5-Permanent/Icons/WinJUPOS-N-up.png\' \'WinJUPOS Info DONE\' -t 5000'</span>
-os.popen(Notify+Key.ENTER)
+'''</span>
+<span class="kw">if</span> Planet==<span class="dig">5</span>:
+    <span class="skw">type</span>(<span class="str">"Jupiter"</span>)
+    <span class="cmt">#type(Key.ENTER)</span>
+    <span class="cmt">#type(DATE+" - "+T)</span>
+    <span class="cmt">#type(Key.ENTER)</span>
+    <span class="cmt">#paste(R)</span>
+    <span class="kw">print</span>(<span class="str">"j"</span>+DATE+<span class="str">"_"</span>+TIME)
+    <span class="kw">print</span>(DATE+<span class="str">" - "</span>+TIME+<span class="str">"UTC"</span>)
+    <span class="kw">print</span>(<span class="str">"\n"</span>+CMSYStext)
+    <span class="kw">print</span>(<span class="str">"\n"</span>+<span class="str">"Dia:"</span>+Dia+<span class="str">", mag:"</span>+Mag+<span class="str">"\n"</span>+<span class="str">"Alt:"</span>+ALT+<span class="str">", Ls:"</span>+LoS+<span class="str">"\nElong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
+    <span class="cmt">#type('s', KEY_CTRL)</span>
+    <span class="cmt">#sleep(2)</span>
+
 </pre>
 </body>
 </html>

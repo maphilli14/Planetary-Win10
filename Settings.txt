@@ -1,3 +1,5 @@
-FireCaptureRoot='C:\Personal\A-Inbox\FC'
-b='C:\B-Sorted'
-c='D:\Personal'
+[Captures]
+fcroot = /mnt/e/A-Inbox/FC/
+fcarchive = /mnt/e/E-Delete/
+stacked = /mnt/d/B-Sorted/Astronomy/20-Stacked/SolarSystem/
+stacked2 = /mnt/d/D-Permanent/OneDrive/B-Sorted/Astronomy/20-Stacked/SolarSystem/

@@ -1,0 +1,8 @@
+[Captures]
+firecaptureroot = 'C:\Personal\A-Inbox\FC'
+savedsettingsroot = 'D:\C-Archives\Astronomy\Logs\FC'
+savedstacksroot = 'D:\Personal\B-Sorted'
+d:\ = None
+
+[Finals]
+D:\C-Archives\Astronomy\20-SavedStacks\SolarSystem

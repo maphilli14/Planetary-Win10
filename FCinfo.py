@@ -15,9 +15,9 @@ def parser(ROOT,Planet,DATE):
         FClist=[]
         #Vars
         FPS='FPS (avg.)'
-        FCfile=os.path.join(SettingsRoot,Planet,DATE+'.txt')
-        if not os.path.isdir(os.path.join(SettingsRoot,Planet)):
-                os.mkdir(os.path.join(SettingsRoot,Planet))
+        FCfile=os.path.join(ChangeSettings.SavedSettingsRoot,Planet,DATE+'.txt')
+        if not os.path.isdir(os.path.join(ChangeSettings.SavedSettingsRoot,Planet)):
+                os.mkdir(os.path.join(ChangeSettings.SavedSettingsRoot,Planet))
         else:
                 pass
         if not os.path.isfile(FCfile):
@@ -25,14 +25,16 @@ def parser(ROOT,Planet,DATE):
                 open(FCfile,'a').close()
         else:
                 pass
-        CAPS=os.listdir(ROOT)
+        CAPS=os.listdir(os.path.join(ROOT,Planet))
         for RGB in CAPS:
-                fldr=os.listdir(os.path.join(ROOT,RGB))
+                fldr=os.listdir(os.path.join(ROOT,Planet,RGB))
                 txt = [l for l in fldr if 'txt' in l]
                 FClist.append(RGB)
                 FClist.append('======================')
                 for i in txt:
-                        f=open(os.path.join(ROOT,RGB,i)).readlines()
+                        Time=str('Time= '+i[11:17])
+                        f=open(os.path.join(ROOT,Planet,RGB,i)).readlines()
+                        FClist.append(Time)
                         for l in f:
                                 if re.search('^Filter=', l):
                                         FClist.append(l.strip())
