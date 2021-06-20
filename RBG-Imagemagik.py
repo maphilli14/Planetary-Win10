@@ -34,7 +34,9 @@ STACKEDFOLDER = os.path.join(STACKROOT,RECENT,AS3,AI)
 '''
 
 # totally static down to final folder, this is where they are sharped
-STACKEDFOLDER = input("Where are you stacked files?").replace('\\','/')
+#STACKEDFOLDER = input("Where are you stacked files?").replace('\\','/')
+STACKEDFOLDER='D:\D-Permanent\OneDrive\B-Sorted\Astronomy\\20-Stacked\SolarSystem\\5-Jupiter\\2021\Jupiter_20210618\AS_P50\LrD-1.5-12'
+STACKEDFOLDER=STACKEDFOLDER.replace('\\','/')
 
 
 #L=os.listdir(os.path.join(STACKROOT,RECENT,AS3,AI))
@@ -49,7 +51,7 @@ STACKEDFOLDER=OUT.strip()
 
 L=os.listdir(OUT.strip())
 
-SUBFolders=['RGB','RED','GREEN','BLUE','IR','Anims']
+SUBFolders=['RGB','RED','GREEN','BLUE','IR','Anims','RGB+labels']
 
 for i in SUBFolders:
 	try:
@@ -61,22 +63,22 @@ for i in SUBFolders:
 BLUES=[]
 CAPS=[]
 for f in L:
-	if '-B-' in f:
+	if '_b_' in f:
 		BLUES.append(f)
 
 for f in L:
 	try:
-		if '-B-' in f:
+		if '_b_' in f:
 			BLUE=f
 			shutil.copy(os.path.join(STACKEDFOLDER,BLUE),os.path.join(STACKEDFOLDER,'BLUE'))
 			MID=f[11:17]
-			if '-R-' in L[L.index(f)-1]:
+			if '_r_' in L[L.index(f)-1]:
 					RED = L[L.index(f)-1]
 					shutil.copy(os.path.join(STACKEDFOLDER,RED),os.path.join(STACKEDFOLDER,'RED'))
 					RGB=RED[0:11]+MID+'-RGB'+RED[19:]
 			else:
 					RED = ''
-			if '-G-' in L[L.index(f)+1]:
+			if '_g_' in L[L.index(f)+1]:
 					GREEN = L[L.index(f)+1]
 					shutil.copy(os.path.join(STACKEDFOLDER,GREEN),os.path.join(STACKEDFOLDER,'GREEN'))
 			else:
@@ -88,8 +90,32 @@ for f in L:
 			print('BLUE = '+f)
 			if not RED=='' and not GREEN=='' and not BLUE=='':
 					print('All RGB FOUND!')
+					#
+					#ease of use vars
+					#
+					INFILE=os.path.join(STACKEDFOLDER,'RGB',RGB)
+					OUTFILE=os.path.join(STACKEDFOLDER,'RGB+labels',RGB)
+					LEVELS=' -level 0%,60% '
+					RGBdt=RGB[:17]
+					#tst
+					try:
+						print('trying to ls')
+						os.popen('ls -la '+INFILE)
+						print()
+					except:
+						print('failed to ls INFLE')
+					#
+					#
+					#end ease of use vars
+					#
 					CAPS.append(MID)
+					#This command does the RGB composition
 					os.popen('convert '+os.path.join(STACKEDFOLDER,RED)+' '+os.path.join(STACKEDFOLDER,GREEN)+' '+os.path.join(STACKEDFOLDER,BLUE)+' -combine -set colorspace sRGB '+os.path.join(STACKEDFOLDER,'RGB',RGB))
+					#This command adds labels
+					os.popen('convert '+INFILE+LEVELS+' -font Times-Bold -pointsize 40 -stroke none -fill white -annotate +5+1275 \'Michael A. Phillips\'  -font Times-Bold -pointsize 20 -stroke none -fill white -annotate +5+25 '+RGBdt+' '+OUTFILE)
+					#This command adds watermark
+					time.sleep(2.2)
+					os.popen('composite -geometry +1255+1190 /mnt/d/D-Permanent/Astronomy/Templates/maptag.png '+OUTFILE+' '+OUTFILE)
 					#shutil.copy(os.path.join(STACKEDFOLDER,RGB),os.path.join(STACKEDFOLDER,'RGB'))
 					
 			else:

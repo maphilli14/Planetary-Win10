@@ -85,38 +85,16 @@ E=Ephtext.split()
 
 
 
+#
+#DEBUG HERE
+#
+#
+Elong=E[40][:-1]
+print(Elong)
 
-'''
-       R=("j"+DATE+"_"+TIME+"\n\n"+CMSYStext+"\n\n"+
-        "Dia:"+Dia+", mag:"+Mag+"\n"+
-        "Alt:"+ALT+", Ls:"+LoS+
-        "\nElong: "+Elong+"("+ElongDir+")")
 
-Dia=E[51]
-Mag=E[71]
-Ring=E[80].rstrip(',')
-Elong=E[39]
-ElongDir=E[41]
-LoS=E[87]
-print("This is DATE")
-print(DATE)
-print("This is TIME")
-print(TIME)
-print("This is CMSYStext")
-print(CMSYStext)
-print("This is Dia")
-print(E[52])
-print("This is Mag")
-print(E[72])
-print("This is Ring")
-print(E[81].encode('utf-8').strip().rstrip(','))
-print("This is Elong")
-print(E[40].encode('utf-8').strip())
-print("This is ElongDir")
-print(E[42].encode('utf-8').strip())
-print("This is LoS")
-print(E[88].encode('utf-8').strip())
-'''
+
+
 
 if Planet == '5':
     Dia=E[52].encode('utf-8').strip()
@@ -194,19 +172,20 @@ if Planet == '4':
 #    print(R)
 
 
-if Planet == 'Venus':
-    Dia=E[49]
-    Mag=E[74]
-    Elong=E[39]
-    ElongDir=E[41]
-    Phase=str(float(E[54]))
+if Planet == '2':
+    Dia=E[50]
+    Mag=E[75]
+    Elong=E[40][:-1]
+    ElongDir=E[42]
+    Phase=str(float(E[55]))
     #
     #RESULTS
     #
-    R=("v"+DATE+"_"+TIME+"\n\n"+CMSYStext+"\n\n"+
-        "Dia:"+Dia+", mag:"+Mag+"\n"+
-        "Alt:"+ALT+", Phase:"+Phase+
-        "\nElong: "+Elong+"("+ElongDir+")")
+    print("v"+DATE+"_"+TIME)
+    print(CMSYStext)
+    print("Dia:"+Dia+", mag:"+Mag)
+    print(ALT+", Phase:"+Phase)
+    print("Elong: "+Elong+"("+ElongDir+")")
 
 if Planet == 'Mercury':
     Dia=E[49]
@@ -268,19 +247,6 @@ if Planet == 'Uranus':
         "Alt:"+ALT+", Ring:"+Ring+
         "\nElong: "+Elong+"("+ElongDir+")")
 
-
-#
-'''
-os.popen("notepad "+CurrentFile)
-sleep(5)
-type(Key.END, KEY_CTRL)
-sleep(0.5)
-type(Key.ENTER)
-type(Key.ENTER)
-#type(Deg)
-print("typing Planet")
-
-'''
 if Planet==5:
     type("Jupiter")
     #type(Key.ENTER)

@@ -157,38 +157,16 @@ E=Ephtext.split()
 
 
 
+<span class="cmt">#</span>
+<span class="cmt">#DEBUG HERE</span>
+<span class="cmt">#</span>
+<span class="cmt">#</span>
+Elong=E[<span class="dig">40</span>][:-<span class="dig">1</span>]
+<span class="kw">print</span>(Elong)
 
-<span class="str">'''
-       R=("j"+DATE+"_"+TIME+"\n\n"+CMSYStext+"\n\n"+
-        "Dia:"+Dia+", mag:"+Mag+"\n"+
-        "Alt:"+ALT+", Ls:"+LoS+
-        "\nElong: "+Elong+"("+ElongDir+")")
 
-Dia=E[51]
-Mag=E[71]
-Ring=E[80].rstrip(',')
-Elong=E[39]
-ElongDir=E[41]
-LoS=E[87]
-print("This is DATE")
-print(DATE)
-print("This is TIME")
-print(TIME)
-print("This is CMSYStext")
-print(CMSYStext)
-print("This is Dia")
-print(E[52])
-print("This is Mag")
-print(E[72])
-print("This is Ring")
-print(E[81].encode('utf-8').strip().rstrip(','))
-print("This is Elong")
-print(E[40].encode('utf-8').strip())
-print("This is ElongDir")
-print(E[42].encode('utf-8').strip())
-print("This is LoS")
-print(E[88].encode('utf-8').strip())
-'''</span>
+
+
 
 <span class="kw">if</span> Planet == <span class="str">'5'</span>:
     Dia=E[<span class="dig">52</span>].encode(<span class="str">'utf-8'</span>).strip()
@@ -266,19 +244,20 @@ print(E[88].encode('utf-8').strip())
 <span class="cmt">#    print(R)</span>
 
 
-<span class="kw">if</span> Planet == <span class="str">'Venus'</span>:
-    Dia=E[<span class="dig">49</span>]
-    Mag=E[<span class="dig">74</span>]
-    Elong=E[<span class="dig">39</span>]
-    ElongDir=E[<span class="dig">41</span>]
-    Phase=str(float(E[<span class="dig">54</span>]))
+<span class="kw">if</span> Planet == <span class="str">'2'</span>:
+    Dia=E[<span class="dig">50</span>]
+    Mag=E[<span class="dig">75</span>]
+    Elong=E[<span class="dig">40</span>][:-<span class="dig">1</span>]
+    ElongDir=E[<span class="dig">42</span>]
+    Phase=str(float(E[<span class="dig">55</span>]))
     <span class="cmt">#</span>
     <span class="cmt">#RESULTS</span>
     <span class="cmt">#</span>
-    R=(<span class="str">"v"</span>+DATE+<span class="str">"_"</span>+TIME+<span class="str">"\n\n"</span>+CMSYStext+<span class="str">"\n\n"</span>+
-        <span class="str">"Dia:"</span>+Dia+<span class="str">", mag:"</span>+Mag+<span class="str">"\n"</span>+
-        <span class="str">"Alt:"</span>+ALT+<span class="str">", Phase:"</span>+Phase+
-        <span class="str">"\nElong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
+    <span class="kw">print</span>(<span class="str">"v"</span>+DATE+<span class="str">"_"</span>+TIME)
+    <span class="kw">print</span>(CMSYStext)
+    <span class="kw">print</span>(<span class="str">"Dia:"</span>+Dia+<span class="str">", mag:"</span>+Mag)
+    <span class="kw">print</span>(ALT+<span class="str">", Phase:"</span>+Phase)
+    <span class="kw">print</span>(<span class="str">"Elong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
 
 <span class="kw">if</span> Planet == <span class="str">'Mercury'</span>:
     Dia=E[<span class="dig">49</span>]
@@ -340,19 +319,6 @@ print(E[88].encode('utf-8').strip())
         <span class="str">"Alt:"</span>+ALT+<span class="str">", Ring:"</span>+Ring+
         <span class="str">"\nElong: "</span>+Elong+<span class="str">"("</span>+ElongDir+<span class="str">")"</span>)
 
-
-<span class="cmt">#</span>
-<span class="str">'''
-os.popen("notepad "+CurrentFile)
-sleep(5)
-type(Key.END, KEY_CTRL)
-sleep(0.5)
-type(Key.ENTER)
-type(Key.ENTER)
-#type(Deg)
-print("typing Planet")
-
-'''</span>
 <span class="kw">if</span> Planet==<span class="dig">5</span>:
     <span class="skw">type</span>(<span class="str">"Jupiter"</span>)
     <span class="cmt">#type(Key.ENTER)</span>
